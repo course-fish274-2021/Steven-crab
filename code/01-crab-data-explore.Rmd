@@ -3,6 +3,13 @@ title: "How do the crabs stack up?"
 output: html_document
 ---
 
+
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+
 ## What is the data
 
 ```{r}
@@ -12,6 +19,7 @@ knitr::kable(head(crab_data))
 ```
 
 
+## How many crabs are in each treatment?
 
 ```{r}
 crab_data %>%
@@ -19,7 +27,7 @@ crab_data %>%
   summarize(count = n())
 ```
 
-
+## How much RNA do I get from crabs in each treatment?
 
 ```{r}
 ggplot(crab_data, aes(x = total.yield_ng)) +
