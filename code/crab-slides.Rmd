@@ -1,0 +1,36 @@
+---
+title: "How to the crabs stack up?"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+
+## What is the data
+
+```{r}
+crab_data <- read.csv("../data/crab-data.csv")
+
+knitr::kable(head(crab_data))
+```
+
+
+## How many crabs are in each treatment?
+
+```{r, echo=FALSE}
+knitr::kable(
+  crab_data %>%
+  group_by(trtmnt_tank) %>%
+  summarize(count = n())
+)
+```
+
+## How much RNA do I get from crabs in each treatment?
+
+```{r}
+ggplot(crab_data, aes(x = total.yield_ng)) +
+  geom_histogram(bins = 15) +
+  facet_wrap(~trtmnt_tank)
+```
