@@ -35,3 +35,26 @@ ggplot(crab_data, aes(x = total.yield_ng)) +
   facet_wrap(~trtmnt_tank)
 ```
 
+
+
+# Day and yield 
+
+```{r}
+
+ggplot(crab_data, aes(x = sample_day, y = total.yield_ng)) +
+  geom_point(size = 3, color = "blue", alpha = 0.5) +
+  scale_y_log10()
+```
+
+
+#Relationship with treatment and status?
+
+
+
+```{r}
+crab_data %>%
+  group_by(trtmnt_tank, maturity) %>%
+  summarize(n = n())
+```
+
+
