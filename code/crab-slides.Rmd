@@ -8,6 +8,17 @@ library(tidyverse)
 ```
 
 
+## A crab getting bled
+
+![crab](https://bittercrab.files.wordpress.com/2018/03/swabcrab.jpg?w=204)
+
+## Two questions 
+
+
+1) How many crabs are in each treatment?
+
+2) What is the distribution of RNA yield?
+
 ## What is the data
 
 ```{r}
@@ -15,6 +26,11 @@ crab_data <- read.csv("../data/crab-data.csv")
 
 knitr::kable(head(crab_data))
 ```
+
+
+## Another look  
+
+![screenshot of data](http://gannet.fish.washington.edu/seashell/snaps/Steven-crabcrab-data.csv_at_main__course-fish274-2021Steven-crab_2021-12-02_09-13-15.png)
 
 
 ## How many crabs are in each treatment?
@@ -27,10 +43,35 @@ knitr::kable(
 )
 ```
 
+
+
+## Relationship  with treatment and status?
+
+
+```{r, echo=FALSE, message=FALSE}
+knitr::kable(
+  crab_data %>%
+  group_by(trtmnt_tank, maturity) %>%
+  summarize(n = n())
+)
+```
+
+
+
 ## How much RNA do I get from crabs in each treatment?
 
 ```{r}
 ggplot(crab_data, aes(x = total.yield_ng)) +
   geom_histogram(bins = 15) +
   facet_wrap(~trtmnt_tank)
+```
+
+
+## Sampling day and yield?
+
+
+```{r}
+ggplot(crab_data, aes(x = sample_day, y = total.yield_ng)) +
+  geom_point(size = 3, color = "blue", alpha = 0.5) +
+  scale_y_log10()
 ```
